@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 import datetime
+import time
 
 querystring = {"limit":"10"}
 headers = {'x-apikey': '5ae5155ef6e433fdb5775309029afa8a94510b4dec73e075180e6751e4716167'}
@@ -19,7 +20,7 @@ except IOError as ioerr:
 ##########  End Csv header Writr #############
 
 
-def DomainReportReader(domain, delay):
+def DomainReportReader(domain):
     url = "https://www.virustotal.com/api/v3/domains/" + domain + "/resolutions"
     response = requests.request("GET", url, headers=headers, params=querystring)
     #print(response.text)
@@ -33,7 +34,7 @@ def DomainReportReader(domain, delay):
         date = timestamp.strftime('%Y-%m-%d %H:%M:%S')  ###Convert TimeStamp to Date formate
         tmp += 1
         data = [date,ip_address,host_name]
-        return data
+        dataWriter.writerow(data)
     
 try:
     # read domains from file and pass them to DomainScanner and DomainReportReader
@@ -41,14 +42,9 @@ try:
                                               # be opened/modified during reading anyway
         for domain in infile:
             domain = domain.strip('\n')
-            try:
-                data = DomainReportReader(domain)
-                if data:
-                    dataWriter.writerow(data)
-                    time.sleep(20)  # wait for VT API rate limiting
-            except Exception as err:  # keeping it
-                print('Encountered an error but scanning will continue.', err)
-
+            DomainReportReader(domain)
+            print("Succesful..... wait 20 sec")
+            time.sleep(20)  # wait for VT API rate limiting
 except IOError as ioerr:
     print('Please ensure the file is closed.')
     print(ioerr)
