@@ -1,0 +1,59 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "date": 1575847251,
+                "host_name": "pasta58.com",
+                "ip_address": "45.56.77.175",
+                "resolver": "VirusTotal"
+            },
+            "id": "45.56.77.175pasta58.com",
+            "links": {
+                "self": "https://www.virustotal.com/api/v3/resolutions/45.56.77.175pasta58.com"
+            },
+            "type": "resolution"
+        },
+        {
+            "attributes": {
+                "date": 1541695172,
+                "host_name": "pasta58.com",
+                "ip_address": "74.91.19.113",
+                "resolver": "VirusTotal"
+            },
+            "id": "74.91.19.113pasta58.com",
+            "links": {
+                "self": "https://www.virustotal.com/api/v3/resolutions/74.91.19.113pasta58.com"
+            },
+            "type": "resolution"
+        },
+        {
+            "attributes": {
+                "date": 1540351847,
+                "host_name": "pasta58.com",
+                "ip_address": "23.227.207.233",
+                "resolver": "VirusTotal"
+            },
+            "id": "23.227.207.233pasta58.com",
+            "links": {
+                "self": "https://www.virustotal.com/api/v3/resolutions/23.227.207.233pasta58.com"
+            },
+            "type": "resolution"
+        },
+        {
+            "attributes": {
+                "date": 1528131211,
+                "host_name": "pasta58.com",
+                "ip_address": "78.46.12.142",
+                "resolver": "VirusTotal"
+            },
+            "id": "78.46.12.142pasta58.com",
+            "links": {
+                "self": "https://www.virustotal.com/api/v3/resolutions/78.46.12.142pasta58.com"
+            },
+            "type": "resolution"
+        }
+    ],
+    "links": {
+        "self": "https://www.virustotal.com/api/v3/domains/pasta58.com/resolutions?limit=10"
+    }
+}
