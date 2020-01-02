@@ -29,17 +29,20 @@ def hashesReportReader(hashes):
         #print(read_content['data'])
         if len(read_content['data']) != 0:
             tmp = 0
-            for i in read_content['data']:
-                ip_address = read_content['data'][tmp]['id']
-                country = read_content['data'][tmp]['attributes']['country']
-                Owner = read_content['data'][tmp]['attributes']['as_owner']
-                date =  read_content['data'][tmp]['attributes']['whois_date']
-                timestamp = datetime.datetime.fromtimestamp(date) ###Convert date number to Date TimeStamp
-                Date = timestamp.strftime('%Y-%m-%d %H:%M:%S')  ###Convert TimeStamp to Date formate
-                #print(ip_address)
-                data = [hashes,ip_address,country,Owner,Date]
-                dataWriter.writerow(data)
-                tmp += 1
+            try:
+                for i in read_content['data']:
+                    ip_address = read_content['data'][tmp]['id']
+                    country = read_content['data'][tmp]['attributes']['country']
+                    Owner = read_content['data'][tmp]['attributes']['as_owner']
+                    date =  read_content['data'][tmp]['attributes']['whois_date']
+                    timestamp = datetime.datetime.fromtimestamp(date) ###Convert date number to Date TimeStamp
+                    Date = timestamp.strftime('%Y-%m-%d %H:%M:%S')  ###Convert TimeStamp to Date formate
+                    #print(ip_address)
+                    data = [hashes,ip_address,country,Owner,Date]
+                    dataWriter.writerow(data)
+                    tmp += 1
+            except:
+                print(hashes + "Error in detail")
         else:                                               #Add Remark for Node
             #print("Empty")
             data = [hashes,'NA','NA','NA','NA','Node Only']

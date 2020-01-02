@@ -21,27 +21,10 @@ except IOError as ioerr:
 
 
 def DomainReportReader(domain):
-    url = "https://www.virustotal.com/api/v3/domains/" + domain + "/resolutions"
+    url = "https://www.virustotal.com/api/v3/domains/" + domain + "/relationship"
     response = requests.request("GET", url, headers=headers, params=querystring)
-    #print(response.text)
-    if response.status_code== 200:
-        print("Succesful "+ domain +" wait 16 sec for next...")
-        read_content = response.json()
-        tmp = 0
-        for i in read_content['data']:
-            ip_address = read_content['data'][tmp]['attributes']['ip_address'] ###Read IP
-            host_name = read_content['data'][tmp]['attributes']['host_name'] ###Read host Name
-            date = read_content['data'][tmp]['attributes']['date']  ###Read date in number Form
-            timestamp = datetime.datetime.fromtimestamp(date) ###Convert date number to Date TimeStamp
-            date = timestamp.strftime('%Y-%m-%d %H:%M:%S')  ###Convert TimeStamp to Date formate
-            tmp += 1
-            data = [date,ip_address,host_name]
-            dataWriter.writerow(data)
-            
-    else:
-        print("error  wait 16 sec for next...")
-        data = [domain,'NA','NA']
-        dataWriter.writerow(data)
+    print(response.text)
+
 try:
     # read domains from file and pass them to DomainScanner and DomainReportReader
     with open('domains.txt', 'r') as infile:  # keeping the file open because it shouldnt
@@ -49,7 +32,8 @@ try:
         for domain in infile:
             domain = domain.strip('\n')
             DomainReportReader(domain)
-            time.sleep(16)  # wait for VT API rate limiting
+            print("Succesful..... wait 20 sec")
+            #time.sleep(20)  # wait for VT API rate limiting
 except IOError as ioerr:
     print('Please ensure the file is closed.')
     print(ioerr)
